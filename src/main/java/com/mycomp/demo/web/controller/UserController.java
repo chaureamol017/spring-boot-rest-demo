@@ -1,4 +1,4 @@
-package com.demo.control;
+package com.mycomp.demo.web.controller;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.entity.User;
-import com.demo.service.UserService;
+import com.mycomp.demo.persistence.entity.User;
+import com.mycomp.demo.service.UserService;
 
 
 /**

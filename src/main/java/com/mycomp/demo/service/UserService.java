@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.service;
+package com.mycomp.demo.service;
 
 import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.demo.entity.User;
+import com.mycomp.demo.persistence.entity.User;
 
 /**
  *
@@ -28,7 +30,7 @@ public interface UserService {
 
     void deleteUser(String id);
     
-    public JSONObject populateUserJson(User user);
+    public JSONObject populateUserJson(User user) throws JSONException;
     
-    public JSONObject populatUserJson(User user, JSONObject detailsJson);
+    public JSONObject populatUserJson(User user, JSONObject detailsJson) throws JSONException;
 }

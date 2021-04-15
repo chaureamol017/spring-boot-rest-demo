@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.demo.dao;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.demo.entity.User;
+package com.mycomp.demo.repository;
 
 /**
  *
  * @author Amol
  */
-public interface UserDao extends JpaRepository<User, String> {
-
+public class UserDaoImpl {
+    
 }
