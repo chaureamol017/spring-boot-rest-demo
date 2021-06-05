@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycomp.demo.persistence.entity.User;
+//import com.mycomp.demo.persistence.service.JpaService;
 import com.mycomp.demo.repository.UserDao;
 
 /**
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDaoObj;
+    
+//    @Autowired
+//    private JpaService persistenceService;
 
     @Override
     public User saveUser(User user) {
@@ -37,6 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsers() {
+//    	List<User> allUsers = persistenceService.findAll(User.class);
+//        return allUsers;
         return userDaoObj.findAll();
     }
 
