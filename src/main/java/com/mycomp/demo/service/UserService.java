@@ -7,9 +7,6 @@ package com.mycomp.demo.service;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.mycomp.demo.persistence.entity.User;
 
 /**
@@ -24,13 +21,12 @@ public interface UserService {
 
     public List<User> getAllUsers();
 
-    public User getUser(String id);
+    List<User> getUsers(List<Long> userIds);
 
-    public JSONObject getUserFormated(String id);
+    public User getUser(Long id);
 
-    void deleteUser(String id);
-    
-    public JSONObject populateUserJson(User user) throws JSONException;
-    
-    public JSONObject populatUserJson(User user, JSONObject detailsJson) throws JSONException;
+    void deleteUser(Long id);
+
+    void deleteUsers(List<Long> idd);
+
 }

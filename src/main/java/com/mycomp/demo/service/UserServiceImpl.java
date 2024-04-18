@@ -7,13 +7,10 @@ package com.mycomp.demo.service;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycomp.demo.persistence.entity.User;
-//import com.mycomp.demo.persistence.service.JpaService;
 import com.mycomp.demo.repository.UserDao;
 
 /**
@@ -47,58 +44,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(String id) {
+    public List<User> getUsers(final List<Long> userIds) {
+//    	List<User> allUsers = persistenceService.findAll(User.class);
+//        return allUsers;
+        return userDaoObj.findAllById(userIds);
+    }
+
+    @Override
+    public User getUser(Long id) {
         return userDaoObj.getOne(id);
     }
 
     @Override
-    public JSONObject getUserFormated(String id) {
-        User user = getUser(id);
-        try {
-			return populateUserJson(user);
-		} catch (JSONException e) {
-		}
-        return new JSONObject();
-    }
-
-    @Override
-    public void deleteUser(String id) {
+    public void deleteUser(Long id) {
         userDaoObj.deleteById(id);
     }
 
     @Override
-    public JSONObject populateUserJson(User user) throws JSONException {
-        JSONObject detailsJson = new JSONObject();
-
-        if (user != null) {
-            populatUserJson(user, detailsJson);
-            String registrationFor = user.getRegistrationFor();
-            String middleName = user.getMiddleName();
-            String emailId = user.getEmailId();
-
-            detailsJson.put("registrationFor", registrationFor);
-            detailsJson.put("middleName", middleName);
-            detailsJson.put("emailId", emailId);
-        }
-
-        return detailsJson;
+    public void deleteUsers(List<Long> ids) {
+        ids.stream().forEach(id -> userDaoObj.deleteById(id));
     }
 
-    @Override
-    public JSONObject populatUserJson(User user, JSONObject detailsJson) throws JSONException {
-        if (detailsJson != null) {
-            detailsJson = new JSONObject();
-        }
-        if (user != null) {
-            Long userId = user.getUserId();
-            String firstName = user.getFirstName();
-            String lastName = user.getLastName();
-
-            detailsJson.put("userId", userId);
-            detailsJson.put("firstName", firstName);
-            detailsJson.put("lastName", lastName);
-        }
-
-        return detailsJson;
-    }
 }

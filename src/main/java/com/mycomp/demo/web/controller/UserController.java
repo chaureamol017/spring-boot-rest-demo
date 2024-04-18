@@ -2,12 +2,15 @@ package com.mycomp.demo.web.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +32,7 @@ import com.mycomp.demo.service.UserService;
 public class UserController {
 @Autowired
 private UserService userServiceObj;
+Logger logger = LoggerFactory.getLogger(UserController.class);
 
 @PostMapping("/save")
 public ResponseEntity<User> save(@RequestBody User user) {
@@ -52,6 +56,7 @@ public ResponseEntity<User> update(@RequestBody User user) {
 
 @GetMapping("/all")
 public ResponseEntity<List<User>> getAllProduct() {
+    logger.info("Get all");
     List<User> users = userServiceObj.getAllUsers();
     if (users != null) {
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -61,18 +66,25 @@ public ResponseEntity<List<User>> getAllProduct() {
 }
 
 
-@GetMapping("/al")
-public List<User> getAlProduct() {
+@GetMapping("/all")
+public List<User> getAllUsers() {
     List<User> users = userServiceObj.getAllUsers();
 
     return users;
 }
 
-/*
-* To do: use Optionnal<E>
- */
-@GetMapping("/byid")
-public ResponseEntity<User> getUser(@RequestParam(name = "id") String id) {
+@GetMapping()
+public ResponseEntity<List<User>> getUsers(@RequestParam(name = "ids") List<Long> ids) {
+    List<User> users = userServiceObj.getUsers(ids);
+    if (users != null) {
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<>(users, HttpStatus.NOT_FOUND);
+    }
+}
+
+@GetMapping("/id/{id}")
+public ResponseEntity<User> getUser(@PathVariable(name = "id") Long id) {
     User user = userServiceObj.getUser(id);
     if (user != null) {
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -81,8 +93,13 @@ public ResponseEntity<User> getUser(@RequestParam(name = "id") String id) {
     }
 }
 
-@DeleteMapping("/delete")
-public void deleteUser(@RequestParam(name = "id") String id) {
+@DeleteMapping("/id/{id}")
+public void deleteUser(@PathVariable(name = "id") Long id) {
     userServiceObj.deleteUser(id);
+}
+
+@DeleteMapping()
+public void deleteUsers(@RequestParam(name = "ids") List<Long> ids) {
+    userServiceObj.deleteUsers(ids);
 }
 }

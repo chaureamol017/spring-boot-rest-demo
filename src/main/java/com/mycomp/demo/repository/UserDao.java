@@ -13,6 +13,6 @@ import com.mycomp.demo.persistence.entity.User;
  *
  * @author Amol
  */
-public interface UserDao extends JpaRepository<User, String> {
+public interface UserDao extends JpaRepository<User, Long> {
 
 }
