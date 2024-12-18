@@ -54,17 +54,6 @@ public ResponseEntity<User> update(@RequestBody User user) {
     }
 }
 
-@GetMapping("/all")
-public ResponseEntity<List<User>> getAllProduct() {
-    logger.info("Get all");
-    List<User> users = userServiceObj.getAllUsers();
-    if (users != null) {
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    } else {
-        return new ResponseEntity<>(users, HttpStatus.NOT_FOUND);
-    }
-}
-
 
 @GetMapping("/all")
 public List<User> getAllUsers() {
