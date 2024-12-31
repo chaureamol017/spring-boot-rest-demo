@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(Long id) {
-        return userDaoObj.getOne(id);
+        return userDaoObj.findById(id).orElse(null);
     }
 
     @Override

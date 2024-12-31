@@ -1,0 +1,11 @@
+<ehcache
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd">
+
+    <cache
+            name="users"
+            maxElementsInMemory="100"
+            timeToLiveSeconds="3600"
+            memoryStoreEvictionPolicy="FIFO"
+    />
+</ehcache>

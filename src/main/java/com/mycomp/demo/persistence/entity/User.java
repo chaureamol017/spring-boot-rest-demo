@@ -5,6 +5,9 @@
  */
 package com.mycomp.demo.persistence.entity;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +25,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "users")
 //@Setter
 //@Getter
 public class User implements Serializable {
